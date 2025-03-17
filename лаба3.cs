@@ -7,24 +7,24 @@ using SequenceApp;
 
 namespace SequenceApp
 {
-    // Клас для роботи з послідовністю цілих чисел
+    // класік для роботи з послідовністю цілих чисел 
     public class Sequence
     {
         public List<int> Numbers { get; set; }
 
-        // Конструктор з параметрами
+        // конструктор з параметрами
         public Sequence(List<int> numbers)
         {
             Numbers = numbers;
         }
 
-        // Параметричний (без параметрів) конструктор для десеріалізації
+        // параметричний конструктор для десеріалізації
         public Sequence()
         {
             Numbers = new List<int>();
         }
 
-        // Перевірка: чи є послідовність строго зростаючою
+        //  чи є послідовність строго зростаючою???
         public bool IsStrictlyIncreasing()
         {
             for (int i = 0; i < Numbers.Count - 1; i++)
@@ -35,7 +35,7 @@ namespace SequenceApp
             return true;
         }
 
-        // Перевірка: чи є послідовність строго спадною
+        // чи є послідовність строго спадною???
         public bool IsStrictlyDecreasing()
         {
             for (int i = 0; i < Numbers.Count - 1; i++)
@@ -46,7 +46,7 @@ namespace SequenceApp
             return true;
         }
 
-        // Перевірка: чи є послідовність неспадною (кожен наступний не менший за попередній)
+        // чи є послідовність неспадною (кожен наступний не менший за попередній)???
         public bool IsNonDecreasing()
         {
             for (int i = 0; i < Numbers.Count - 1; i++)
@@ -57,7 +57,7 @@ namespace SequenceApp
             return true;
         }
 
-        // Перевірка: чи є послідовність незростаючою (кожен наступний не більший за попередній)
+        // чи є послідовність незростаючою (кожен наступний не більший за попередній)????
         public bool IsNonIncreasing()
         {
             for (int i = 0; i < Numbers.Count - 1; i++)
@@ -68,7 +68,7 @@ namespace SequenceApp
             return true;
         }
 
-        // Перевірка: чи є послідовність арифметичною прогресією
+        // чи є послідовність арифметичною прогресією????
         public bool IsArithmeticProgression()
         {
             if (Numbers.Count < 2) return true;
@@ -81,13 +81,13 @@ namespace SequenceApp
             return true;
         }
 
-        // Перевірка: чи є послідовність геометричною прогресією
+        // чи є послідовність геометричною прогресією??
         public bool IsGeometricProgression()
         {
             if (Numbers.Count < 2) return true;
-            // Якщо всі числа рівні 0, вважаємо, що послідовність геометрична
+            // іф всі числа рівні 0, вважаємо, що послідовність геометрична
             if (Numbers.All(n => n == 0)) return true;
-            // Якщо хоча б один з попередніх елементів рівний 0 (але не всі), неможливо визначити співвідношення
+            // іф хоча б один з попередніх елементів рівний 0 (але не всі), неможливо визначити співвідношення
             for (int i = 0; i < Numbers.Count - 1; i++)
             {
                 if (Numbers[i] == 0)
@@ -103,13 +103,13 @@ namespace SequenceApp
             return true;
         }
 
-        // Перевірка належності елемента до послідовності
+        //  належність елемента до послідовності??
         public bool Contains(int element)
         {
             return Numbers.Contains(element);
         }
 
-        // Перевірка рівності двох послідовностей (поелементно)
+        // рівність двох послідовностей (поелементно)???
         public override bool Equals(object obj)
         {
             if (obj == null || !(obj is Sequence))
@@ -135,7 +135,7 @@ namespace SequenceApp
             return hash;
         }
 
-        // Повертає максимальне значення послідовності
+        // Повертає макс значення послідовності
         public int GetMax()
         {
             if (Numbers.Count == 0)
@@ -143,7 +143,7 @@ namespace SequenceApp
             return Numbers.Max();
         }
 
-        // Повертає мінімальне значення послідовності
+        // Повертає мін значення послідовності
         public int GetMin()
         {
             if (Numbers.Count == 0)
@@ -151,7 +151,7 @@ namespace SequenceApp
             return Numbers.Min();
         }
 
-        // Повертає список локальних максимумів (значення, що перевищують сусідні)
+        // повертає список локальних макс (значення, що перевищують сусідні)
         public List<int> GetLocalMaxima()
         {
             List<int> localMaxima = new List<int>();
@@ -177,7 +177,7 @@ namespace SequenceApp
             return localMaxima;
         }
 
-        // Повертає список локальних мінімумів (значення, що менші за сусідні)
+        // повертає список локальних мін (значення, що менші за сусідні)
         public List<int> GetLocalMinima()
         {
             List<int> localMinima = new List<int>();
@@ -203,16 +203,16 @@ namespace SequenceApp
             return localMinima;
         }
 
-        // Розбиває послідовність на підпослідовності за допомогою локальних екстремумів
-        // Повертає список підпослідовностей (кожна підпослідовність – List<int>)
+        // розбиває послідовність на підпослідовності за допомогою локальних екстремумів
+        // ретурн список підпослідовностей (кожна підпослідовність – List<int>)
         public List<List<int>> GetSubsequencesByDelimiters()
         {
             List<int> delimiters = new List<int>();
             if (Numbers.Count > 0)
             {
-                // Додаємо початковий індекс
+                // add початковий індекс
                 delimiters.Add(0);
-                // Додаємо індекси локальних максимумів і мінімумів (крім початкового та кінцевого)
+                // add індекси локальних максимумів і мінімумів (крім початкового та кінцевого)
                 for (int i = 1; i < Numbers.Count - 1; i++)
                 {
                     if ((Numbers[i] > Numbers[i - 1] && Numbers[i] > Numbers[i + 1]) ||
@@ -221,10 +221,10 @@ namespace SequenceApp
                         delimiters.Add(i);
                     }
                 }
-                // Додаємо останній індекс
+                // add останній індекс
                 delimiters.Add(Numbers.Count - 1);
             }
-            // Уникальні значення та сортування
+            // уникальні значення та сортування
             delimiters = delimiters.Distinct().OrderBy(x => x).ToList();
 
             List<List<int>> subsequences = new List<List<int>>();
@@ -238,7 +238,7 @@ namespace SequenceApp
             return subsequences;
         }
 
-        // Повертає найбільшу підпослідовність за довжиною
+        // повертає найбільшу підпослідовність за довжиною
         public List<int> GetLargestSubsequence()
         {
             var subsequences = GetSubsequencesByDelimiters();
@@ -247,7 +247,7 @@ namespace SequenceApp
             return subsequences.OrderByDescending(s => s.Count).First();
         }
 
-        // Повертає найменшу підпослідовність за довжиною
+        // повертає найменшу підпослідовність за довжиною
         public List<int> GetSmallestSubsequence()
         {
             var subsequences = GetSubsequencesByDelimiters();
@@ -256,7 +256,7 @@ namespace SequenceApp
             return subsequences.OrderBy(s => s.Count).First();
         }
 
-        // Метод для збереження об’єкта у JSON файл
+        // метод для збереження об’єкта у JSON файл
         public void SaveToJson(string filePath)
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
@@ -264,7 +264,7 @@ namespace SequenceApp
             File.WriteAllText(filePath, jsonString);
         }
 
-        // Метод для створення об’єкта з JSON файлу
+        // метод для створення об’єкта з JSON файлу
         public static Sequence LoadFromJson(string filePath)
         {
             string jsonString = File.ReadAllText(filePath);
@@ -276,7 +276,7 @@ namespace SequenceApp
     {
         static void Main(string[] args)
         {
-            // Створення об’єкта Sequence з прикладовою послідовністю
+            // створення об’єкта Sequence з прикладовою послідовністю
             Sequence seq = new Sequence(new List<int> { 1, 3, 5, 7, 6, 4, 8, 10, 9 });
 
             Console.WriteLine("Послідовність: " + string.Join(", ", seq.Numbers));
@@ -290,7 +290,7 @@ namespace SequenceApp
             int elementToCheck = 7;
             Console.WriteLine("Послідовність містить " + elementToCheck + ": " + seq.Contains(elementToCheck));
 
-            // Створення ще однієї послідовності для перевірки рівності
+            // створення ще однієї послідовності для перевірки рівності
             Sequence seq2 = new Sequence(new List<int> { 1, 3, 5, 7, 6, 4, 8, 10, 9 });
             Console.WriteLine("Послідовність дорівнює seq2: " + seq.Equals(seq2));
 
